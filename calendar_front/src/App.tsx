@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import  { useEffect, useState } from 'react';
 import dayjs from 'dayjs';
 import {  } from "./App.css";
+import EventModal from './components/Modal/EventModal';
 
 interface EventProps {
   id: number;
@@ -22,6 +23,7 @@ const Event = () => {
   // const [time,setTime]=useState<string>('')
   const [memo, setMemo] = useState<string>('');
   const [color, setColor] = useState<string>('');
+ const [modalIsOpen, setModalIsOpen] = useState(false);
 
   useEffect(() => {
     const fetcher = async () => {
@@ -55,7 +57,8 @@ const Event = () => {
           <li key={id}>{title}</li>
         ))}
       </ul>
-      <form>
+      <button type='button' onClick={() => setModalIsOpen(true)}>新しい予定を追加</button>
+      <EventModal isOpen={modalIsOpen} onClose={() => setModalIsOpen(false)} title="新しい予定を追加">
         <div>
           <label htmlFor='event-name'>名前</label>
           <input
@@ -99,7 +102,7 @@ const Event = () => {
         <button className='submit' type='button' onClick={handleNewEvent}>
           予定追加！
         </button>
-      </form>
+      </EventModal>
     </div>
   );
 };
