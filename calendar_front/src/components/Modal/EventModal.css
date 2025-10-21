@@ -14,6 +14,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 100;
 }
 
 .overlay-after {
@@ -39,12 +40,25 @@
 
 .content-after {
   width: 70%;
-  height: 40%;
+  height: 60%;
+  max-width: 600px;
   background-color: rgba(255, 255, 255, 1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  font-family: 'Segoe UI', sans-serif;
 }
 
 .content-before {
   width: 0%;
   height: 0%;
   background-color: transparent;
+}
+.close-btn{
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size:2.3rem;
+  cursor: pointer;
+  color: white;
 }

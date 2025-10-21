@@ -32,3 +32,75 @@
   background-color: blue;
   color: white;
 }
+/* Modal */
+
+/* .event-modal {
+  padding: 24px;
+  background-color: #fff;
+  border-radius: 12px;
+  
+  margin: auto;
+
+} */
+
+.modal-label {
+  margin-bottom: 16px;
+  font-size: 1.1rem;
+  color: #333;
+  text-align: center;
+  margin: 1rem;
+}
+
+.modal-div {
+  margin-bottom: 16px;
+
+}
+
+.event-modal label {
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #444;
+}
+
+.event-modal input[type='text'],
+.event-modal input[type='date'],
+.event-modal input[type='color'],
+.modal-input {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: border-color 0.2s ease;
+}
+
+.modal-input:focus,
+.modal-input:focus {
+  border-color: #0078d4;
+  outline: none;
+}
+
+.modal-color {
+  height: 40px;
+  padding: 0;
+  border: none;
+  background: none;
+}
+.submit-wrap{
+ 
+}
+.submit-btn {
+  display: block; 
+  margin: 0 auto;
+  background-color: #0078d4;
+  color: white;
+  padding:0.7rem 2.1rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.submit-btn:hover {
+  background-color: #005ea2;
+}

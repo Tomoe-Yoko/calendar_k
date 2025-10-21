@@ -1,5 +1,6 @@
 import Modal from 'react-modal';
-import {  } from "./EventModal.css";
+import {} from './EventModal.css';
+
 
 Modal.setAppElement('#root');
 interface Props {
@@ -9,28 +10,27 @@ interface Props {
   children?: React.ReactNode;
 }
 
-const EventModal = ({isOpen,onClose,title,children}:Props) => {
- 
+const EventModal = ({ isOpen, onClose, title, children }: Props) => {
+
   return (
     <div>
-      <Modal 
-      isOpen={isOpen}
-      onRequestClose={onClose}
+      <Modal
+        isOpen={isOpen}
+        onRequestClose={onClose}
         overlayClassName={{
-          base: "overlay-base",
-          afterOpen: "overlay-after",
-          beforeClose: "overlay-before"
+          base: 'overlay-base',
+          afterOpen: 'overlay-after',
+          beforeClose: 'overlay-before',
         }}
         className={{
-          base: "content-base",
-          afterOpen: "content-after",
-          beforeClose: "content-before"
+          base: 'content-base',
+          afterOpen: 'content-after',
+          beforeClose: 'content-before',
         }}
->
-  <h2>{title}</h2>
-  {children}
-  
-          <button type='button'>×</button>
+      >
+        <button type='button' onClick={onClose} className='close-btn'>×</button>
+        <h2>{title}</h2>
+        {children}
       </Modal>
     </div>
   );

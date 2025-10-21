@@ -1,10 +1,10 @@
 // import React from 'react';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
-import interactionPlugin from '@fullcalendar/interaction';
+import interactionPlugin, { type DateClickArg } from '@fullcalendar/interaction';
 
-const CalendarView = ({}) => {
-  const handleDateClick = (arg) => {
+const CalendarView = () => {
+  const handleDateClick = (arg:DateClickArg) => {
     alert(arg.dateStr);
   };
   return (
@@ -12,6 +12,9 @@ const CalendarView = ({}) => {
       
       <FullCalendar
         plugins={[dayGridPlugin, interactionPlugin]}
+          headerToolbar={{
+            right: 'dayGridMonth,dayGridWeek',
+          }}
         initialView='dayGridMonth'
         dateClick={handleDateClick}
       />
