@@ -2,6 +2,9 @@ import  { useEffect, useState } from 'react';
 import dayjs from 'dayjs';
 import {  } from "./App.css";
 import EventModal from './components/Modal/EventModal';
+import CalendarView from './components/CalendarView';
+
+
 
 interface EventProps {
   id: number;
@@ -9,8 +12,8 @@ interface EventProps {
   title: string;
   start_date: string;
   end_date: string;
-  start_time: string;
-  end_time: string;
+  // start_time: string;
+  // end_time: string;
   memo: string;
   color: string;
 }
@@ -19,7 +22,8 @@ const Event = () => {
   const [event, setEvent] = useState<EventProps[]>([]);
   const [name, setName] = useState<string>('');
   const [title, setTitle] = useState<string>('');
-  // const [date,setDate]=useState<string>('')
+  const [startDay,setStartDay]=useState<string>('')
+  const [endDay,setEndDay]=useState<string>('')
   // const [time,setTime]=useState<string>('')
   const [memo, setMemo] = useState<string>('');
   const [color, setColor] = useState<string>('');
@@ -41,8 +45,8 @@ const Event = () => {
       title,
       start_date: dayjs().format('YYYY-MM-DD'),
       end_date: dayjs().format('YYYY-MM-DD'),
-      start_time: '',
-      end_time: '',
+      // start_time: '',
+      // end_time: '',
       memo,
       color: '#FF5733',
     };
@@ -52,6 +56,7 @@ const Event = () => {
   return (
     <div>
       <h2>今日のスケジュール</h2>
+     <CalendarView/>
       <ul>
         {event.map(({ id, title }) => (
           <li key={id}>{title}</li>
@@ -59,6 +64,26 @@ const Event = () => {
       </ul>
       <button type='button' onClick={() => setModalIsOpen(true)}>新しい予定を追加</button>
       <EventModal isOpen={modalIsOpen} onClose={() => setModalIsOpen(false)} title="新しい予定を追加">
+        <div>
+          <label htmlFor='event-start-day'>開始日</label>
+          <input
+            type='date'
+            id='event-start-day'
+            name='event-start-day'
+            value={startDay}
+            onChange={(e) => setStartDay(e.target.value)}
+          />
+        </div>
+        <div>
+          <label htmlFor='event-end-day'>終了日</label>
+          <input
+            type='date'
+            id='event-end-day'
+            name='event-end-day'
+            value={endDay}
+            onChange={(e) => setEndDay(e.target.value)}
+          />
+        </div>
         <div>
           <label htmlFor='event-name'>名前</label>
           <input
