@@ -5,7 +5,6 @@ import EventModal from './components/Modal/EventModal';
 import CalendarView from './components/CalendarView';
 import type { EventData, EventRequestBody } from './types/event';
 
-
 const getColorByCategory = (color: string): string => {
   switch (color) {
     case '営業':
@@ -25,12 +24,9 @@ const getColorByCategory = (color: string): string => {
 
 const Event = () => {
   const [event, setEvent] = useState<EventData[]>([]);
-  // const [name, setName] = useState<string>('');
   const [title, setTitle] = useState<string>('');
   const [startDay, setStartDay] = useState<string>('');
   const [endDay, setEndDay] = useState<string>('');
-  // const [time,setTime]=useState<string>('')
-  // const [memo, setMemo] = useState<string>('');
   const [color, setColor] = useState<string>('');
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
@@ -62,7 +58,7 @@ const Event = () => {
       if (!res.ok) {
         throw new Error('Failed to create event');
       }
-      const data: EventData = await res.json();
+      const data: EventData = await res.json();   console.log(data);
       setEvent((prev) => [...prev, data]);
       setModalIsOpen(false);
       // フォームリセット
@@ -70,6 +66,8 @@ const Event = () => {
       setColor('');
       setStartDay('');
       setEndDay('');
+      
+   
     } catch (err) {
       console.error(err);
     }
@@ -81,8 +79,7 @@ const Event = () => {
       <button type='button' onClick={() => setModalIsOpen(true)}>
         新しい予定を追加
       </button>
-      <CalendarView event={event}/>
-  
+      <CalendarView event={event} />
       <div className='event-modal'>
         <EventModal
           isOpen={modalIsOpen}
@@ -101,7 +98,6 @@ const Event = () => {
               onChange={(e) => setStartDay(e.target.value)}
               className='modal-input'
             />
-
             <label htmlFor='event-end-day' className='modal-label'>
               終了日
             </label>
@@ -114,19 +110,6 @@ const Event = () => {
               className='modal-input'
             />
           </div>
-          {/* <div className='modal-div'>
-            <label htmlFor='event-name' className='modal-label'>
-              名前
-            </label>
-            <input
-              type='text'
-              id='event-name'
-              name='event-name'
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              className='modal-input'
-            />
-          </div> */}
           <div className='modal-div'>
             <label htmlFor='event-title' className='modal-label'>
               予定
@@ -140,31 +123,10 @@ const Event = () => {
               className='modal-input'
             />
           </div>
-          {/* <div className='modal-div'>
-            <label htmlFor='event-memo' className='modal-label'>
-              memo
-            </label>
-            <input
-              type='text'
-              id='event-memo'
-              name='event-memo'
-              value={memo}
-              onChange={(e) => setMemo(e.target.value)}
-              className='modal-input'
-            />
-          </div> */}
           <div className='modal-div'>
             <label htmlFor='event-color' className='modal-label'>
               カラー
             </label>
-            {/* <input
-              type='color'
-              id='event-color'
-              name='event-color'
-              value={color}
-              onChange={(e) => setColor(e.target.value)}
-              className="modal-color"
-            /> */}
             <select
               id='event-color'
               name='event-color'
@@ -172,11 +134,12 @@ const Event = () => {
               onChange={(e) => setColor(e.target.value)}
               className='modal-input'
             >
-              <option value='営業'>営業</option>
-              <option value='マーケティング'>マーケティング</option>
-              <option value='業務'>業務</option>
-              <option value='出荷'>出荷</option>
-              <option value='国内'>国内</option>
+              <option value='営業'>🔵営業</option>
+              <option value='マーケティング'>🟣マーケティング</option>
+              <option value='業務'>🟢業務</option>
+              <option value='出荷'>🟠出荷</option>
+              <option value='国内'>🔴国内</option>
+              <option value='国内'>その他</option>
             </select>
           </div>
           <div className='submit-wrap'>
