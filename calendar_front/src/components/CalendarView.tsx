@@ -38,6 +38,7 @@ const CalendarView = ({event}:CalendarViewProps) => {
         initialView='dayGridMonth'
         dateClick={handleDateClick}
         events={calendarEvents}
+        
       />
     </div>
   );

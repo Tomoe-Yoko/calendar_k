@@ -53,7 +53,7 @@ const Event = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(newEvent),
+        body: JSON.stringify({event:newEvent}),
       });
       if (!res.ok) {
         throw new Error('Failed to create event');
@@ -139,7 +139,7 @@ const Event = () => {
               <option value='業務'>🟢業務</option>
               <option value='出荷'>🟠出荷</option>
               <option value='国内'>🔴国内</option>
-              <option value='国内'>その他</option>
+              <option value='その他'>その他</option>
             </select>
           </div>
           <div className='submit-wrap'>
