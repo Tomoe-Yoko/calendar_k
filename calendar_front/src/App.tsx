@@ -3,24 +3,15 @@ import dayjs from 'dayjs';
 import {} from './App.css';
 import EventModal from './components/Modal/EventModal';
 import CalendarView from './components/CalendarView';
+import type { EventData, EventRequestBody } from './types/event';
 
-interface EventProps {
-  name: string;
-  title: string;
-  start_date: string;
-  end_date: string;
-  // start_time: string;
-  // end_time: string;
-  memo: string;
-  color: string;
-}
 
-const getColorByCategory = (name: string): string => {
-  switch (name) {
+const getColorByCategory = (color: string): string => {
+  switch (color) {
     case '営業':
       return '#81beffff'; // 青
     case 'マーケティング':
-      return '#d2a6ffff'; // 紫
+      return '#bfa6ffff'; // 紫
     case '業務':
       return '#c3ff87ff'; // 黄緑
     case '出荷':
@@ -33,20 +24,20 @@ const getColorByCategory = (name: string): string => {
 };
 
 const Event = () => {
-  const [event, setEvent] = useState<EventProps[]>([]);
-  const [name, setName] = useState<string>('');
+  const [event, setEvent] = useState<EventData[]>([]);
+  // const [name, setName] = useState<string>('');
   const [title, setTitle] = useState<string>('');
   const [startDay, setStartDay] = useState<string>('');
   const [endDay, setEndDay] = useState<string>('');
   // const [time,setTime]=useState<string>('')
-  const [memo, setMemo] = useState<string>('');
+  // const [memo, setMemo] = useState<string>('');
   const [color, setColor] = useState<string>('');
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   useEffect(() => {
     const fetcher = async () => {
       const res = await fetch('http://localhost:3000/api/v1/events');
-      const data: EventProps[] = await res.json();
+      const data: EventData[] = await res.json();
       setEvent(data);
     };
     fetcher();
@@ -54,14 +45,10 @@ const Event = () => {
 
   const handleNewEvent = async () => {
     const colorCode = getColorByCategory(color);
-    const newEvent: EventProps = {
-      name,
+    const newEvent: EventRequestBody = {
       title,
       start_date: dayjs().format('YYYY-MM-DD'),
       end_date: dayjs().format('YYYY-MM-DD'),
-      // start_time: '',
-      // end_time: '',
-      memo,
       color: colorCode,
     };
     try {
@@ -75,13 +62,11 @@ const Event = () => {
       if (!res.ok) {
         throw new Error('Failed to create event');
       }
-      const data: EventProps = await res.json();
+      const data: EventData = await res.json();
       setEvent((prev) => [...prev, data]);
       setModalIsOpen(false);
       // フォームリセット
-      setName('');
       setTitle('');
-      setMemo('');
       setColor('');
       setStartDay('');
       setEndDay('');
@@ -96,12 +81,8 @@ const Event = () => {
       <button type='button' onClick={() => setModalIsOpen(true)}>
         新しい予定を追加
       </button>
-      <CalendarView event={event} />
-      {/* <ul>
-        {event.map(({ index, title }) => (
-          <li key={index}>{title}</li>
-        ))}
-      </ul> */}
+      <CalendarView event={event}/>
+  
       <div className='event-modal'>
         <EventModal
           isOpen={modalIsOpen}
@@ -133,7 +114,7 @@ const Event = () => {
               className='modal-input'
             />
           </div>
-          <div className='modal-div'>
+          {/* <div className='modal-div'>
             <label htmlFor='event-name' className='modal-label'>
               名前
             </label>
@@ -145,7 +126,7 @@ const Event = () => {
               onChange={(e) => setName(e.target.value)}
               className='modal-input'
             />
-          </div>
+          </div> */}
           <div className='modal-div'>
             <label htmlFor='event-title' className='modal-label'>
               予定
@@ -159,7 +140,7 @@ const Event = () => {
               className='modal-input'
             />
           </div>
-          <div className='modal-div'>
+          {/* <div className='modal-div'>
             <label htmlFor='event-memo' className='modal-label'>
               memo
             </label>
@@ -171,7 +152,7 @@ const Event = () => {
               onChange={(e) => setMemo(e.target.value)}
               className='modal-input'
             />
-          </div>
+          </div> */}
           <div className='modal-div'>
             <label htmlFor='event-color' className='modal-label'>
               カラー
