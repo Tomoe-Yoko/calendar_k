@@ -42,7 +42,7 @@ def set_event
 end
 
 def event_params
-params.require(:event).permit(:name,:title,:start_date,:end_date,:start_time,:end_time,:memo,:color)
+params.require(:event).permit(:title,:start_date,:end_date,:color)
 end
 
 
